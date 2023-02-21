@@ -10,6 +10,19 @@
     tools:context=".MainActivity">
 
 
+
+
+    <TextView
+        android:id="@+id/tvLink"
+        android:layout_width="match_parent"
+        android:layout_height="25sp"
+        android:gravity="center"
+        android:text="STATISTICS"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textColor="@color/greyNumberButton"
+        android:textSize="14sp" />
+
     <TextView
         android:id="@+id/tvCalculations"
         android:layout_width="match_parent"
@@ -19,7 +32,6 @@
         android:padding="5dp"
         android:textColor="@color/greyNumberButton"
         android:textSize="44sp" />
-
     <TextView
         android:id="@+id/tvResult"
         android:layout_width="match_parent"

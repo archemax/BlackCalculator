@@ -1,19 +1,51 @@
 package com.example.calc123
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.ezylang.evalex.Expression
 import java.math.BigDecimal
 
+import com.appsflyer.AppsFlyerLib
+import com.appsflyer.attribution.AppsFlyerRequestListener
+
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //AppsFlyer integration code
+        AppsFlyerLib.getInstance().setDebugLog(true)
+
+
+        AppsFlyerLib.getInstance().init("Z7bAwgthtGfCY3EBXZaZRh", null, this)
+        AppsFlyerLib.getInstance().start(this, "Z7bAwgthtGfCY3EBXZaZRh", object :
+            AppsFlyerRequestListener {
+            override fun onSuccess() {
+                Log.d("AppsFlyer", "launch sent successfully")
+            }
+
+            override fun onError(errorCode: Int, errorDesc: String) {
+                Log.d("AppsFlyer", "Launch failed to be sent:\n" +
+                            "Error code: " + errorCode + "\n"
+                            + "Error description: " + errorDesc
+                )
+            }
+        })
+
+
+        val tvLink = findViewById<TextView>(R.id.tvLink)
+        tvLink.setOnClickListener {
+            val intent = Intent(this, WebViewActivity::class.java)
+            startActivity(intent)
+        }
+
 
         //numbers
         val zeroBtn = findViewById<TextView>(R.id.btnZero)
@@ -155,8 +187,6 @@ class MainActivity : AppCompatActivity() {
                 tvCalculations.text = calculationsStringBuilder
 
             }
-
-
 
 
         }
